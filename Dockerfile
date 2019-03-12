@@ -10,12 +10,12 @@ RUN apt-get update \
        wget \
        zlib1g-dev \
     && apt-get clean \
-    && wget https://github.com/alexdobin/STAR/archive/2.6.0c.tar.gz \
-    && tar xf 2.6.0c.tar.gz \
-    && rm  2.6.0c.tar.gz \
-    && cd STAR-2.6.0c/source \
+    && wget https://github.com/alexdobin/STAR/archive/2.6.1a.tar.gz \
+    && tar xf 2.6.1a.tar.gz \
+    && rm  2.6.1a.tar.gz \
+    && cd STAR-2.6.1a/source \
     && make STAR \
     && mv STAR /usr/local/bin/ \
     && cd ../../ \
-    && rm -rf STAR-2.6.0c \
+    && rm -rf STAR-2.6.1a \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
