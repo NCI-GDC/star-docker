@@ -1,4 +1,4 @@
-FROM ubuntu:xenial-20161010
+FROM quay.io/ncigdc/bio-u18:latest
 
 MAINTAINER Jeremiah H. Savage <jeremiahsavage@gmail.com>
 
