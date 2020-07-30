@@ -9,11 +9,15 @@ services:
 install: make build
 
 stages:
+  - name: test
+    if: branch != master AND type != pull_request
   - name: publish
     if: branch = master AND type != pull_request
 
 jobs:
   include:
+    - stage: test
+      script: echo
     - stage: publish
       name: Publish production image
       script:
