@@ -1,0 +1,25 @@
+# Template Travis config to build and publish Docker images
+# Publishes staging tags for all non-master branches.
+# Only publishes release image tags when master updated.
+
+# IMPORTANT: Disable PR builds, since these branches are treated as master
+services:
+  - docker
+
+install: make build
+
+stages:
+  - name: publish
+    if: branch = master AND type != pull_request
+
+jobs:
+  include:
+    - stage: publish
+      name: Publish production image
+      script:
+        - docker login -u="$QUAY_USERNAME" -p="$QUAY_PASSWORD" quay.io
+        - make publish
+
+env:
+  global:
+  # Add encrypted Quay creds here
