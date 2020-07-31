@@ -1,0 +1,21 @@
+services:
+- docker
+install: make build
+stages:
+- name: test
+  if: branch != master AND type != pull_request
+- name: publish
+  if: branch = master AND type != pull_request
+jobs:
+  include:
+  - stage: test
+    script: echo
+  - stage: publish
+    name: Publish production image
+    script:
+    - docker login -u="$QUAY_USERNAME" -p="$QUAY_PASSWORD" quay.io
+    - make publish
+env:
+  global:
+  - secure: UnO5o5t4xw+nUGiH4k1lVdXxQeOC3l2uJcNaK2liE+LLc4ZQp2uutsUSH9ZrBJLIUUsZHFIqhwv96ERnyaEl9AdzmVKOnkIfq5lOKPNeIzKHs4Ny6CUGq9q2VTH1B1zqnrbuzrDV+TKaICUaLAxJ2UgAsyFeoSsq/59kfY+dzyaJCWnVDEvcaJDK9PDyhtCfRXrKXjWlww/msrS1knE31h33cCZDEY3t1VM4gPXJm3hVpIvndtkrZIpFMEtBXW177lynmlJODK34oQKYJiZy2oPJhdE9SruvG27da1ePM9hAtTrjyj8qbIOeTFvW2eNDnCF3ZqwWKbq3mTgOq6jw04GYvZZCcZ0ED849QFuz9RF8WHwaYkOBW5QfzuJiX1iITWWIuawQqvh/L8vodNM5hpUJK2kt4wPlCdgzY7tweDKPoRC8jrWMJdoajwCxI+AD4ebnhYqERcGcLqj2mW4SAYKwDranx7p3C7vX7EHeYlEspL7bWId5jmuVbovpKXvZfVTFBd4G27BP0aiJpurACw2jkudkZGIpTSY0cH15BAEQ7fBryNP0rwfiitSGXDhybpIBSnDRJP5iPq7SPoHShbFLPWUj6GxyRg5uySLQ309k+Fm0DeXTNWlPSW//eHaBiIWEsBSMgZcROZlUpQCbSEmbNMhlURKa0iYqSLYu2Z0=
+  - secure: XFeZy4b7SPfSvCkPo5VbxxfeE5L5UreV4NYmj8zTQHAx4ALwofFCNlMmgXZLkuUzW5LzhFJwi5VUEzhT4sB7pwokmtIG2PTQNe9BOxbq12k419AQHFo88T7W7D6BD0nRnLs2aXAyEiTMolbkhGuEkTHPDHEBPt3H8Q/QcReP3T04G8zz21xyaTgj5rY4HecdF7aEp9JShIS9qmr9sVxRPfqlYGSiNBgBEhsGnUogPjToaKDPkBL6i18ghylLhlTufOrN/QTdhadDd0HQLnZKXY/WnXK5mfxJsgCAvzWF5vivhkk22PB62rnd0pTGiJnRLW3Rii5g+wKaqEz7EkFHSjalUX7eruDbAKsQQMBzmaxwn0SE+v2vRBDKWM6MFP3v35bmlwQF1M5BZtfyL+FF/56vz2ZlexaGi5suEoCt5wswohMScr3XBsRtr9kNfCsMDVRJfMFh2eI1na87Xlf+C17C87fQvtrfwXCui3x3/Te9yYE5ukDXteVdmLorhJmHy7SgVRkmdRh5i5p5z4meYDSBFCbcwlUgXLZ3yu6v8s+6nQfz6y4GaQ8rQ6H5Jlh0b9Sfe/AgwUGuG21RDDbZ73SH7YIXDwZIh9SFd3UkoYL2pjAKIUkcAbGGu/zMj2PzcZzseVoTdBJapUdzvRrNnRPldnV2vvU/iecegQ3rP60=
