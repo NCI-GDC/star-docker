@@ -27,7 +27,7 @@ docker-login:
 
 build: build-docker
 
-build-docker:
+build-docker: docker-login
 	@echo
 	@echo -- Building docker --
 	docker build . \
