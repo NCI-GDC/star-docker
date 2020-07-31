@@ -22,9 +22,9 @@ docker-login:
 
 .PHONY: build
 build:
-	bash build.sh build
+	@bash build.sh build
 
 
 .PHONY: publish
 publish:
-	bash build.sh publish
+	@bash build.sh publish
