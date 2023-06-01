@@ -4,18 +4,11 @@ FROM ${REPOSITORY}/ncigdc/base-u22.04-builder:${BUILDER_TAG} AS builder
 
 ARG VERSION
 
-ENV URL=https://github.com/alexdobin/STAR/archive/${VERSION}.tar.gz \
+ENV URL=https://github.com/alexdobin/STAR/archive/${VERSION}.tar.gz
 
-RUN apt-get update \
-	&& apt-get install -y \
-      wget
-	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/*
-
-# Example download and compile step
 RUN wget $URL \
         && tar -xzf ${VERSION}.tar.gz \
         && rm ${VERSION}.tar.gz \
         && cp STAR-${VERSION}/bin/Linux_x86_64_static/STAR /usr/local/bin/STAR \
-        && rm -rf STAR-${VERSION} \
+        && rm -rf STAR-${VERSION}
 
